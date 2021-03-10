@@ -3,15 +3,15 @@
 
 This repository is to analyze the convergence rate of a federated learning algorithm named SCAFFOLD which is inspired by the SVRG algorithm in noisy fading MAC settings and heterogenous data, in order to formulate a new algorithm that accelerates the learning process in such settings.  We inspired by 3 related works:
 
-1.	**On Analog Gradient Descent Learning Over Multiple Access Fading Channels
+1.	****On Analog Gradient Descent Learning Over Multiple Access Fading Channels****
 The authors implemented GBMA algorithm in which the users transmit an analog function of their local gradient using a common shaping-waveform and the network edge update the global model using a received superposition of the analog transmitted signals which represents a noisy distorted version of the gradients.
 https://arxiv.org/abs/1908.07463
 
-2.	**Over-the-Air Federated Learning from Heterogeneous Data
+2.	**Over-the-Air Federated Learning from Heterogeneous Data**
 The authors introduce time-varying pre-coding and scaling scheme COTAF which facilitates the aggregation and gradually mitigates the noise effect and maintains the convergence properties of local SGD with heterogeneous data across users.
 https://arxiv.org/abs/2009.12787
 
-3.	**SCAFFOLD - Stochastic Controlled Averaging for Federated Learning
+3.	**SCAFFOLD - Stochastic Controlled Averaging for Federated Learning**
 The authors proposed a stochastic algorithm which overcomes gradients dissimilarity using control variates as estimation of users’ variances, and by that makes FL more robust to heterogeneity in users’ data.
 https://arxiv.org/abs/1910.06378
 
