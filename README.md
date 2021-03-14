@@ -6,9 +6,23 @@ This repository is for the Experiment Section of the paper:
 Authors:
 Canh T. Dinh, Nguyen H. Tran, Minh N. H. Nguyen, Choong Seon Hong, Wei Bao, Albert Zomaya, Vincent Gramoli
 
+<<<<<<< HEAD
 Paper Link: https://arxiv.org/abs/1910.13067 
 
 Source Code (Tensoflow version): https://github.com/CharlieDinh/FEDL
+=======
+1.	**On Analog Gradient Descent Learning Over Multiple Access Fading Channels
+The authors implemented GBMA algorithm in which the users transmit an analog function of their local gradient using a common shaping-waveform and the network edge update the global model using a received superposition of the analog transmitted signals which represents a noisy distorted version of the gradients.
+https://arxiv.org/abs/1908.07463
+
+2.	**Over-the-Air Federated Learning from Heterogeneous Data
+The authors introduce time-varying pre-coding and scaling scheme COTAF which facilitates the aggregation and gradually mitigates the noise effect and maintains the convergence properties of local SGD with heterogeneous data across users.
+https://arxiv.org/abs/2009.12787
+
+3.	**SCAFFOLD - Stochastic Controlled Averaging for Federated Learning
+The authors proposed a stochastic algorithm which overcomes gradients dissimilarity using control variates as estimation of users’ variances, and by that makes FL more robust to heterogeneity in users’ data.
+https://arxiv.org/abs/1910.06378
+>>>>>>> parent of ccf7abe (Update README.md)
 
 # Software requirements:
 - numpy, scipy, pytorch, Pillow, matplotlib.
