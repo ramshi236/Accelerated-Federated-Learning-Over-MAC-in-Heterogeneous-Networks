@@ -60,7 +60,8 @@ def simulate(dataset, algorithm, model, batch_size, learning_rate, L, num_glob_i
     # Average data
     average_data(num_glob_iters=num_glob_iters, algorithm=algorithm, dataset=dataset, similarity=similarity,
                  noise=noise, times=times)
-
+    average_norms(num_glob_iters=num_glob_iters, algorithm=algorithm, dataset=dataset, similarity=similarity,
+                 noise=noise, times=times)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

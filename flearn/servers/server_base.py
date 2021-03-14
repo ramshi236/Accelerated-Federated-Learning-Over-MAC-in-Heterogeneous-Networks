@@ -31,6 +31,8 @@ class Server:
         self.similarity = similarity
         self.noise = noise
         self.communication_thresh = None
+        self.param_norms = []
+        self.control_norms = None
 
     def aggregate_grads(self):
         assert (self.users is not None and len(self.users) > 0)
@@ -78,10 +80,6 @@ class Server:
     def save_results(self):
         """ Save loss, accuracy to h5 file"""
         file_name = "./results/" + self.dataset + "_" + self.algorithm
-        # file_name += "_" + str(self.learning_rate) + "lr"
-        # file_name += "_" + str(self.users_per_round) + "u"
-        # file_name += "_" + str(self.batch_size) + "b"
-        # file_name += "_" + str(self.local_epochs) + "e"
         file_name += "_" + str(self.similarity) + "s"
         if self.noise:
             file_name += '_noisy'
@@ -91,7 +89,20 @@ class Server:
                 hf.create_dataset('rs_glob_acc', data=self.rs_glob_acc)
                 hf.create_dataset('rs_train_acc', data=self.rs_train_acc)
                 hf.create_dataset('rs_train_loss', data=self.rs_train_loss)
-                hf.close()
+
+    def save_norms(self):
+        """ Save norms, to h5 file"""
+        file_name = "./results/" + self.dataset + "_" + self.algorithm + '_norms'
+        file_name += "_" + str(self.similarity) + "s"
+        if self.noise:
+            file_name += '_noisy'
+        file_name += "_" + str(self.times) + ".h5"
+
+        if len(self.param_norms):
+            with h5py.File(file_name, 'w') as hf:
+                hf.create_dataset('rs_param_norms', data=self.param_norms)
+                if self.algorithm == 'SCAFFOLD':
+                    hf.create_dataset('rs_control_norms', data=self.control_norms)
 
     def test(self):
         '''tests self.latest_model on given clients
@@ -136,5 +147,3 @@ class Server:
         print("Average Global Accurancy: ", glob_acc)
         print("Average Global Trainning Accurancy: ", train_acc)
         print("Average Global Trainning Loss: ", train_loss)
-
-

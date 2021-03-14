@@ -90,6 +90,7 @@ class CifarNet(nn.Module):
         self.fc2 = nn.Linear(64, categories)
 
     def forward(self, x):
+        x = torch.reshape(x, (-1, 3, 32, 32))
         x = self.conv1(x)
         x = nn.MaxPool2d(3, 2)(x)
         x = nn.ReLU()(x)

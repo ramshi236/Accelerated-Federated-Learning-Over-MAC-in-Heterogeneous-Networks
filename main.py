@@ -3,11 +3,19 @@ from simulate import simulate
 from data.Femnist.data_generator import generate_data as generate_femnist_data
 from data.CIFAR.data_generator import generate_data as generate_cifar10_data
 
+
+def generate_data(dataset, similarity):
+    if dataset == 'CIFAR':
+        generate_cifar10_data(similarity)
+    elif dataset == 'Femnist':
+        generate_femnist_data(similarity)
+
+
 cifar_dict = {"model": "cnn",
               "batch_size": 60,
-              "learning_rate": 0.08,
+              "learning_rate": 0.008,
               "local_epochs": 1,
-              "L": 0.004,
+              "L": 0.04,
               "users_per_round": 8}
 
 femnist_dict = {"model": "mclr",
@@ -19,28 +27,31 @@ femnist_dict = {"model": "mclr",
 
 input_dict = {}
 
-dataset = 'CIFAR'
+dataset = 'Femnist'
 if dataset == 'CIFAR':
     input_dict = cifar_dict
 elif dataset == 'Femnist':
     input_dict = femnist_dict
 
-num_glob_iters = 200
-times = 1
+num_glob_iters = 300
+times = 15
 algorithms = ["SCAFFOLD", "FedAvg"]
 noises = [True, False]
-similarities = [1]
+similarities = [1, 0.1, 0]
 
 
-for similarity in similarities:
-    # print("Downloading dataset")
-    # generate_cifar10_data(similarity)
-    for noise in noises:
-        for algorithm in algorithms:
-            simulate(**input_dict, dataset=dataset, algorithm=algorithm, similarity=similarity, noise=noise,
-                     num_glob_iters=num_glob_iters, times=times)
+# for similarity in similarities:
+#     generate_data(dataset, similarity)
+#     for noise in noises:
+#         for algorithm in algorithms:
+#             simulate(**input_dict, dataset=dataset, algorithm=algorithm, similarity=similarity, noise=noise,
+#                      num_glob_iters=num_glob_iters, times=times)
 
-plot_by_similarities(dataset, algorithms, noises, similarities, num_glob_iters)
+plot_accuracy(dataset, algorithms, noises, similarities, num_glob_iters)
+plot_norms(dataset, algorithms, noises, similarities, num_glob_iters)
 
 # plot_dict = get_plot_dict(input_dict, algorithms, epochs)
-# plot_by_epochs(**plot_dict)
+# plot_norms(**plot_dict)
+
+
+

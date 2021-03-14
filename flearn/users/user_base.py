@@ -13,6 +13,8 @@ class User:
     Base class for users in federated learning.
     """
     def __init__(self, user_id, train_data, test_data, model, batch_size, learning_rate, L, local_epochs):
+        self.dataset = None
+        self.optimizer = None
         self.model = copy.deepcopy(model)
         self.user_id = user_id  # integer
         self.train_samples = len(train_data)

@@ -52,15 +52,21 @@ class FedAvg(Server):
                 user.drop_lr()
 
             self.aggregate_parameters()
+            self.get_max_norm()
 
             if self.noise:
                 self.apply_channel_effect()
-            # loss_ /= self.total_train_samples
-            # loss.append(loss_)
-            # print(loss_)
-        # print(loss)
+
         self.save_results()
+        self.save_norms()
         self.save_model()
+
+    def get_max_norm(self):
+        param_norms = []
+        for user in self.selected_users:
+            param_norm, control_norm = user.get_params_norm()
+            param_norms.append(param_norm)
+        self.param_norms.append(max(param_norms))
 
     def aggregate_parameters(self):
         assert (self.users is not None and len(self.users) > 0)
@@ -76,7 +82,13 @@ class FedAvg(Server):
             # server_param.data = server_param.data + del_model.data * ratio
             server_param.data = server_param.data + del_model.data / num_of_selected_users
 
-    def apply_channel_effect(self, sigma=1, power_control=4):
+    def get_max_norm(self):
+        param_norms = []
+        for user in self.selected_users:
+            param_norms.append(user.get_params_norm())
+        self.param_norms.append(max(param_norms))
+
+    def apply_channel_effect(self, sigma=1, power_control=2500):
         num_of_selected_users = len(self.selected_users)
         users_norms = []
         for user in self.selected_users:

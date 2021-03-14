@@ -15,6 +15,7 @@ class SCAFFOLD(Server):
                  local_epochs, users_per_round, similarity, noise, times):
         super().__init__(dataset, algorithm, model[0], batch_size, learning_rate, L,
                          num_glob_iters, local_epochs, users_per_round, similarity, noise, times)
+        self.control_norms = []
 
         # Initialize data for all  users
         data = read_data(dataset)
@@ -56,14 +57,13 @@ class SCAFFOLD(Server):
                 user.drop_lr()
 
             self.aggregate_parameters()
+            self.get_max_norm()
 
             if self.noise:
                 self.apply_channel_effect()
-            # loss_ /= self.total_train_samples
-            # loss.append(loss_)
-            # print(loss_)
-        # print(loss)
+
         self.save_results()
+        self.save_norms()
         self.save_model()
 
     def send_parameters(self):
@@ -91,16 +91,20 @@ class SCAFFOLD(Server):
             param.data = param.data + del_model.data / num_of_selected_users
             control.data = control.data + del_control.data / num_of_users
 
-    def apply_channel_effect(self, sigma=1, power_control=4):
-        num_of_selected_users = len(self.selected_users)
+    def get_max_norm(self):
         param_norms = []
         control_norms = []
         for user in self.selected_users:
             param_norm, control_norm = user.get_params_norm()
             param_norms.append(param_norm)
             control_norms.append(control_norm)
-        alpha_t_params = power_control / max(param_norms) ** 2
-        alpha_t_controls = 1000 * power_control / max(control_norms) ** 2
+        self.param_norms.append(max(param_norms))
+        self.control_norms.append((max(control_norms)))
+
+    def apply_channel_effect(self, sigma=1, power_control=2500):
+        num_of_selected_users = len(self.selected_users)
+        alpha_t_params = power_control / self.param_norms[-1] ** 2
+        alpha_t_controls = 4e4 * power_control / self.control_norms[-1] ** 2
         for param, control in zip(self.model.parameters(), self.server_controls):
             param.data = param.data + sigma / (
                         alpha_t_params ** 0.5 * num_of_selected_users * self.communication_thresh) * torch.randn(
