@@ -1,4 +1,4 @@
-# 
+# Accelerated Federated Learning Over MAC in Heterogeneous Networks
 
 we have analyzed the convergence rate of a federated learning algorithm named SCAFFOLD (variation of SVRG) in noisy fading MAC settings and heterogenous data, in order to formulate a new algorithm that accelerates the learning process in such settings.  We inspired by 3 related works:
 we depend on three articles –
