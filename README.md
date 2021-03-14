@@ -12,14 +12,15 @@ The authors introduce time-varying pre-coding and scaling scheme COTAF which fac
 https://arxiv.org/abs/2009.12787
 
 3.	**SCAFFOLD - Stochastic Controlled Averaging for Federated Learning**
->>>>>>> parent of 52069c7 (Update README.md)
 The authors proposed a stochastic algorithm which overcomes gradients dissimilarity using control variates as estimation of users’ variances, and by that makes FL more robust to heterogeneity in users’ data.
 https://arxiv.org/abs/1910.06378
 
 # letest progress 
 We’ve established pythonic framework that executes simulation common FedAvg, COTAF, SCAFFOLD and our proposed scheme over the extended EMNIST data in different heterogeneity scenarios. We examine the performance of SCAFFOLD over noisy fading MAC and try to restore the results of the related works. We also examine different pre-coding scenarios of the controls.
-![image](https://user-images.githubusercontent.com/72392859/111066669-df52c000-84c8-11eb-9929-7391b03c04e7.png)
-![image](https://user-images.githubusercontent.com/72392859/111066670-e37edd80-84c8-11eb-8ebe-cab896643205.png)
+![image](https://user-images.githubusercontent.com/72392859/111066697-10cb8b80-84c9-11eb-9e16-08eabd800db7.png)
+
+![image](https://user-images.githubusercontent.com/72392859/111066712-22149800-84c9-11eb-9360-475919549a34.png)
+
 
 The figures confirm that we manage to restore related works results. In addition, it seems that when the noise applied scaffold might have degradation in performance. We suspect that controls and gradients updates tent differently over time. We use different pre-coding scaling for the controls and simulate a scenario where both pre-coding constricted to same SNR, which led to poor performance and another scenario which we allowed higher SNR in control transmission which led to desired results.
 The next work is to examine how to approach to the controls pre-coding, and procced to mathematical analysis of the scheme
