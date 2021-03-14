@@ -6,37 +6,18 @@ import json
 import os
 import argparse
 from os.path import dirname
-import shutil
 
 
-def generate_data(similarity, num_of_users, samples_num):
-    path = '\\'.join(__file__.split('\\')[0:-1])
-    train_path = path + './data/train/mytrain.json'
-    test_path = path + './data/test/mytest.json'
+def generate_data(similarity, num_of_users=100, samples_num=20):
+    root_path = os.path.dirname(__file__)
+    train_path = root_path + '/data/train/mytrain.json'
+    test_path = root_path + '/data/test/mytest.json'
     dir_path = os.path.dirname(train_path)
-    shutil.rmtree(dir_path)
-    os.makedirs(dir_path)
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
     dir_path = os.path.dirname(test_path)
-    shutil.rmtree(dir_path)
-    os.makedirs(dir_path)
-
-    saved_train_path = path + './data/saved_train/mytrain_sim' + str(similarity) + '.json'
-    saved_test_path = path + './data/saved_test/mytest_sim' + str(similarity) + '.json'
-    if os.path.isfile(saved_train_path) and os.path.isfile(saved_test_path):
-        dst = os.path.dirname(train_path)
-        shutil.copy(saved_train_path, dst)
-        files = os.listdir(dst)
-        os.rename(os.path.join(dst, files[0]), os.path.join(dst, 'mytrain.json'))
-
-        dst = os.path.dirname(test_path)
-        shutil.copy(saved_test_path, dst)
-        files = os.listdir(dst)
-        os.rename(os.path.join(dst, files[0]), os.path.join(dst, 'mytest.json'))
-
-        print("dataset exists , loading saved data")
-        return
-
-    print("dataset missing , creating new data")
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
 
     dataset = 'balanced'
     images, train_labels = emnist.extract_training_samples(dataset)  # TODO: add test samples
@@ -100,11 +81,6 @@ def generate_data(similarity, num_of_users, samples_num):
     with open(train_path, 'w') as outfile:
         json.dump(train_data, outfile)
     with open(test_path, 'w') as outfile:
-        json.dump(test_data, outfile)
-
-    with open(saved_train_path, 'w') as outfile:
-        json.dump(train_data, outfile)
-    with open(saved_test_path, 'w') as outfile:
         json.dump(test_data, outfile)
 
 
