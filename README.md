@@ -17,9 +17,11 @@ https://arxiv.org/abs/1910.06378
 
 # letest progress 
 We’ve established pythonic framework that executes simulation common FedAvg, COTAF, SCAFFOLD and our proposed scheme over the extended EMNIST data in different heterogeneity scenarios. We examine the performance of SCAFFOLD over noisy fading MAC and try to restore the results of the related works. We also examine different pre-coding scenarios of the controls.
-![image](https://user-images.githubusercontent.com/72392859/111066697-10cb8b80-84c9-11eb-9e16-08eabd800db7.png)
 
-![image](https://user-images.githubusercontent.com/72392859/111066712-22149800-84c9-11eb-9360-475919549a34.png)
+![WhatsApp Image 2021-03-09 at 16 37 08](https://user-images.githubusercontent.com/72392859/111066827-b4b53700-84c9-11eb-8b5c-f9d1dd01ff7e.jpeg)
+
+![WhatsApp Image 2021-03-09 at 16 34 31](https://user-images.githubusercontent.com/72392859/111066830-b7b02780-84c9-11eb-8f69-152bc0f83969.jpeg)
+
 
 
 The figures confirm that we manage to restore related works results. In addition, it seems that when the noise applied scaffold might have degradation in performance. We suspect that controls and gradients updates tent differently over time. We use different pre-coding scaling for the controls and simulate a scenario where both pre-coding constricted to same SNR, which led to poor performance and another scenario which we allowed higher SNR in control transmission which led to desired results.
