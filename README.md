@@ -1,6 +1,6 @@
 # **Accelerated Federated Learning Over MAC in Heterogeneous Networks**
 
-I have analyzed the convergence rate of a federated learning algorithm named SCAFFOLD (variation of SVRG) in noisy fading MAC settings and heterogenous data, in order to formulate a new algorithm that accelerates the learning process in such settings.  We inspired by 3 related works:
+I have analyzed the convergence rate of a federated learning algorithm named SCAFFOLD (variation of SVRG) in noisy fading MAC settings and heterogenous data, in order to formulate a new algorithm that accelerates the learning process in such settings.  I inspired by 3 related works:
 I depend on three articles –
 
 1.	**On Analog Gradient Descent Learning Over Multiple Access Fading Channels**
@@ -24,7 +24,7 @@ I’ve established pythonic framework that executes simulation common FedAvg, CO
 
 
 
-The figures confirm that I manage to restore related works results. In addition, it seems that when the noise applied scaffold might have degradation in performance. We suspect that controls and gradients updates tent differently over time. We use different pre-coding scaling for the controls and simulate a scenario where both pre-coding constricted to same SNR, which led to poor performance and another scenario which I allowed higher SNR in control transmission which led to desired results.
+The figures confirm that I manage to restore related works results. In addition, it seems that when the noise applied scaffold might have degradation in performance. We suspect that controls and gradients updates tent differently over time. I use different pre-coding scaling for the controls and simulate a scenario where both pre-coding constricted to same SNR, which led to poor performance and another scenario which I allowed higher SNR in control transmission which led to desired results.
 The next work is to examine how to approach to the controls pre-coding, and procced to mathematical analysis of the scheme
 
 
